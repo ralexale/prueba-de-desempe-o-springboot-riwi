@@ -1,7 +1,7 @@
 package com.riwi.filtro.hector.filtro_riwi_hector.api.dto.request.create;
 
-import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.request.update.OptionQuestionUpdateRequest;
-import jakarta.validation.constraints.Min;
+
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,10 +12,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OptionQuestionRequest extends OptionQuestionUpdateRequest {
+public class OptionQuestionRequest {
 
 
-    @NotNull(message = "the questionId field is required")
-    @Min(value = 1, message = "the questionId field must be greater than 0")
-    private Long questionId;
+    @NotBlank(message = "the text is required")
+    private String text;
+
+
+    @NotNull(message = "the active field is required")
+    private Boolean active;
+
 }

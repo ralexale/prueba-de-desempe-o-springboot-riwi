@@ -4,6 +4,10 @@ import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.request.create.OptionQu
 import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.request.update.OptionQuestionUpdateRequest;
 import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.response.OptionQuestionResponse;
 
-public interface IOptionQuestionService extends CreateReadService<OptionQuestionRequest, OptionQuestionResponse, Long>{
+import java.util.List;
+
+public interface IOptionQuestionService {
+    void createOptionsFromQuestion(List<OptionQuestionRequest> files, Long questionId);
+    void updateOptionsFromQuestion(List<OptionQuestionUpdateRequest> files, Long questionId);
 
 }

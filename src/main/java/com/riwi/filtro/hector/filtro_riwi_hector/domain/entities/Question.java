@@ -29,13 +29,13 @@ public class Question {
     @Enumerated(EnumType.STRING)
     private QuestionType type;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "survey_id")
     private Survey surveyId;
 
 
     @OneToMany(mappedBy = "questionId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = false)
-    private Set<OptionQuestion> optionQuestions = new HashSet<>();
+    private Set<OptionQuestion> options = new HashSet<>();
 
 
     private Boolean active;

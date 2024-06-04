@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,5 +18,5 @@ public class QuestionResponse {
     private String text;
     private String type;
     private Boolean active;
-    private OptionQuestionResponse options;
+    private List<OptionQuestionResponse> options;
 }
