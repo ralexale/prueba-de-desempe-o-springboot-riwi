@@ -32,6 +32,6 @@ public class User {
 
     private Boolean active;
 
-    @OneToMany(mappedBy = "creatorId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "creatorId", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, orphanRemoval = false)
     private Set<Survey> surveys = new HashSet<>();
 }

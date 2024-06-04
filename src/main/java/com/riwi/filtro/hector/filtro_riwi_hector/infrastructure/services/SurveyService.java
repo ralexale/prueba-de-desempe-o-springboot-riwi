@@ -11,6 +11,7 @@ import com.riwi.filtro.hector.filtro_riwi_hector.domain.repositories.SurveyRepos
 import com.riwi.filtro.hector.filtro_riwi_hector.domain.repositories.UserRepository;
 import com.riwi.filtro.hector.filtro_riwi_hector.infrastructure.abstract_services.ISurveyService;
 
+import com.riwi.filtro.hector.filtro_riwi_hector.infrastructure.helpers.Email;
 import com.riwi.filtro.hector.filtro_riwi_hector.infrastructure.mappers.SurveyMapper;
 import com.riwi.filtro.hector.filtro_riwi_hector.util.exeptions.IdNotFoundException;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -34,6 +37,10 @@ public class SurveyService implements ISurveyService {
     @Autowired
     private UserRepository userRepository;
 
+
+    @Autowired
+    private final Email emailHelper;
+
     @Override
     public SurveyResponse create(SurveyRequest surveyRequest) {
         Survey survey = surveyMapper.toSurvey(surveyRequest);
@@ -43,6 +50,11 @@ public class SurveyService implements ISurveyService {
         survey.setCreatorId(user);
 
         Survey savedSurvey = surveyRepository.save(survey);
+
+        if (Objects.nonNull(user.getEmail()))
+            emailHelper.sendEmail(user.getEmail(),
+                    "Survey had been create: "+surveyRequest.getTitle(),
+                    "Thank you for this new survey", user.getName(), LocalDateTime.now() );
 
         return surveyMapper.toSurveyResponse(savedSurvey);
     }
