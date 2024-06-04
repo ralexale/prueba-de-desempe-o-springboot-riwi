@@ -34,7 +34,7 @@ public class Question {
     private Survey surveyId;
 
 
-    @OneToMany(mappedBy = "questionId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "questionId", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<OptionQuestion> options = new HashSet<>();
 
 
