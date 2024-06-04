@@ -4,6 +4,6 @@ import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.request.create.Question
 import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.request.update.QuestionUpdateRequest;
 import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.response.QuestionResponse;
 
-public interface IQuestionService extends CreateReadDeleteService<QuestionRequest, QuestionResponse, Long>,
+public interface IQuestionService extends CreateReadService<QuestionRequest, QuestionResponse, Long>,
         UpdateService<QuestionUpdateRequest, QuestionResponse, Long> {
 }

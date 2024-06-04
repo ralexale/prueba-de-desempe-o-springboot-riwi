@@ -1,5 +1,6 @@
 package com.riwi.filtro.hector.filtro_riwi_hector.infrastructure.mappers;
 
+import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.request.create.OptionQuestionRequest;
 import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.response.OptionQuestionResponse;
 import com.riwi.filtro.hector.filtro_riwi_hector.domain.entities.OptionQuestion;
 import org.mapstruct.Mapper;
@@ -13,7 +14,7 @@ public interface OptionQuestionMapper {
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "questionId", source = "questionId.id")
     })
-    OptionQuestion toOptionQuestion(OptionQuestion optionQuestion);
+    OptionQuestion toOptionQuestion(OptionQuestionRequest optionQuestionRequest);
 
 
     OptionQuestionResponse toOptionQuestionResponse(OptionQuestion optionQuestion);

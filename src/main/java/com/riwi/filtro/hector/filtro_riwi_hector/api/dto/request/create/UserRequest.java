@@ -1,7 +1,15 @@
 package com.riwi.filtro.hector.filtro_riwi_hector.api.dto.request.create;
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserRequest {
 
 
