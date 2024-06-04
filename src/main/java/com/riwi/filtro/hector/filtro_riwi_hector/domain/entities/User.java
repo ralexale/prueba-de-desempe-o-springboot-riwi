@@ -1,6 +1,5 @@
 package com.riwi.filtro.hector.filtro_riwi_hector.domain.entities;
 
-import com.riwi.filtro.hector.filtro_riwi_hector.util.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
