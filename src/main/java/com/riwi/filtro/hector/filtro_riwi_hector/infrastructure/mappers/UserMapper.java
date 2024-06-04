@@ -1,6 +1,7 @@
 package com.riwi.filtro.hector.filtro_riwi_hector.infrastructure.mappers;
 
 import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.request.create.UserRequest;
+import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.response.UserResponse;
 import com.riwi.filtro.hector.filtro_riwi_hector.domain.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,6 +15,4 @@ public interface UserMapper {
 
 
     UserResponse toUserResponse(User user);
-
-    void updateFromUserRequest(UserUpdateRequest userRequest, @MappingTarget User user);
 }
