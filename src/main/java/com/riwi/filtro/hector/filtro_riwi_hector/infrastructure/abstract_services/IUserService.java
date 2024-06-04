@@ -4,6 +4,7 @@ import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.request.create.UserRequ
 import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.response.UserResponse;
 
 
-public interface IUserService extends  CreateReadDeleteService<UserRequest, UserResponse, Long>,
+public interface IUserService extends CreateReadService<UserRequest, UserResponse, Long>,
         UpdateService<UserRequest, UserResponse, Long> {
+
 }
