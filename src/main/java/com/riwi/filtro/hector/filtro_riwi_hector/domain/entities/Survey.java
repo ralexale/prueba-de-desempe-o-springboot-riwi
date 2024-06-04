@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class Survey {
     private String description;
 
     @Column(name = "creation_date", columnDefinition = "TIMESTAMP")
-    private Timestamp creationDate;
+    private LocalDateTime creationDate = LocalDateTime.now();
 
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)

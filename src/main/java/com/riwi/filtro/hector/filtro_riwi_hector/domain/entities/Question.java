@@ -1,5 +1,6 @@
 package com.riwi.filtro.hector.filtro_riwi_hector.domain.entities;
 
+import com.riwi.filtro.hector.filtro_riwi_hector.util.enums.QuestionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +26,8 @@ public class Question {
     private String text;
 
     @Column(length = 50)
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private QuestionType type;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "survey_id")
