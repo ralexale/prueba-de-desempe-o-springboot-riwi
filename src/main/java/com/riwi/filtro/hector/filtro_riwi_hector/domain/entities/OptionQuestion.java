@@ -22,7 +22,7 @@ public class OptionQuestion {
     private String text;
 
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "question_id")
     private Question questionId;
 

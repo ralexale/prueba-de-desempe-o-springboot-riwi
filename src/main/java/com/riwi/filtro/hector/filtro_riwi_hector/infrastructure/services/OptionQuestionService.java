@@ -1,7 +1,7 @@
 package com.riwi.filtro.hector.filtro_riwi_hector.infrastructure.services;
 
 import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.request.create.OptionQuestionRequest;
-import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.response.OptionQuestionResponse;
+import com.riwi.filtro.hector.filtro_riwi_hector.api.dto.request.update.OptionQuestionUpdateRequest;
 import com.riwi.filtro.hector.filtro_riwi_hector.domain.entities.OptionQuestion;
 import com.riwi.filtro.hector.filtro_riwi_hector.domain.entities.Question;
 import com.riwi.filtro.hector.filtro_riwi_hector.domain.repositories.OptionQuestionRepository;
@@ -9,12 +9,15 @@ import com.riwi.filtro.hector.filtro_riwi_hector.domain.repositories.QuestionRep
 import com.riwi.filtro.hector.filtro_riwi_hector.infrastructure.abstract_services.IOptionQuestionService;
 import com.riwi.filtro.hector.filtro_riwi_hector.infrastructure.mappers.OptionQuestionMapper;
 import com.riwi.filtro.hector.filtro_riwi_hector.util.exeptions.IdNotFoundException;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
+@Service
+@AllArgsConstructor
 public class OptionQuestionService implements IOptionQuestionService {
 
     @Autowired
@@ -27,29 +30,34 @@ public class OptionQuestionService implements IOptionQuestionService {
     private QuestionRepository questionRepository;
 
     @Override
-    public OptionQuestionResponse create(OptionQuestionRequest optionQuestionRequest) {
-        OptionQuestion optionQuestion = optionQuestionMapper.toOptionQuestion(optionQuestionRequest);
-
-        Question question = questionRepository.findById(optionQuestionRequest.getQuestionId()).orElseThrow(
-                () -> new IdNotFoundException("QUESTION", optionQuestionRequest.getQuestionId())
+    public void createOptionsFromQuestion(List<OptionQuestionRequest> options, Long questionId) {
+        Question question = questionRepository.findById(questionId).orElseThrow(
+                () -> new IdNotFoundException("QUESTION", questionId)
         );
 
-        optionQuestion.setQuestionId(question);
 
-        optionQuestionRepository.save(optionQuestion);
-
-        return optionQuestionMapper.toOptionQuestionResponse(optionQuestion);
-
-
+        for (OptionQuestionRequest optionQuestionRequest : options) {
+            OptionQuestion optionQuestion = optionQuestionMapper.toOptionQuestion(optionQuestionRequest);
+            optionQuestion.setQuestionId(question);
+            optionQuestionRepository.save(optionQuestion);
+        }
     }
 
     @Override
-    public Page<OptionQuestionResponse> getAll(Pageable pageable) {
-        return null;
-    }
+    public void updateOptionsFromQuestion(List<OptionQuestionUpdateRequest> optionQuestionRequests, Long questionId) {
+        Question question = questionRepository.findById(questionId).orElseThrow(
+                () -> new IdNotFoundException("QUESTION", questionId)
+        );
 
-    @Override
-    public Optional<OptionQuestionResponse> getById(Long aLong) {
-        return Optional.empty();
+        for (OptionQuestionUpdateRequest optionQuestionRequest : optionQuestionRequests) {
+            OptionQuestion optionQuestion = optionQuestionRepository.findById(optionQuestionRequest.getId())
+                    .orElseThrow(() -> new IdNotFoundException("OPTION_QUESTION", optionQuestionRequest.getId()));
+
+            optionQuestion.setQuestionId(question);
+            optionQuestionMapper.updateFromOptionQuestionRequest(optionQuestionRequest, optionQuestion);
+            optionQuestionRepository.save(optionQuestion);
+        }
+
+
     }
 }

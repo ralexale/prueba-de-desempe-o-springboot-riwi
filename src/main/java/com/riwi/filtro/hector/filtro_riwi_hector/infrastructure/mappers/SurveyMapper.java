@@ -15,15 +15,14 @@ public interface SurveyMapper {
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
-            @Mapping(target = "creatorId", source = "creatorId.id")
+            @Mapping(source = "creatorId", target = "creatorId.id")
     })
     Survey toSurvey(SurveyRequest surveyRequest);
 
-
-    @Mapping(target = "questions", ignore = true)
+    @Mapping(source = "questions", target = "questions")
     SurveyResponse toSurveyResponse(Survey survey);
 
-    @Mapping(source = "questions", target = "questions")
+
     SurveyAllResponse toSurveyAllResponse(Survey survey);
 
 

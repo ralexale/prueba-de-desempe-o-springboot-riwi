@@ -32,11 +32,11 @@ public class Survey {
     private LocalDateTime creationDate = LocalDateTime.now();
 
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "creator_id")
     private User creatorId;
 
-    @OneToMany(mappedBy = "surveyId", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "surveyId", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, orphanRemoval = false)
     private Set<Question> questions = new HashSet<>();
 
     private Boolean active;

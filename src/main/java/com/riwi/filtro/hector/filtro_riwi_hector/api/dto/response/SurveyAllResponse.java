@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,6 +19,5 @@ public class SurveyAllResponse {
     private String title;
     private String description;
     private Boolean active;
-    private Timestamp creationDate;
-
+    private LocalDateTime creationDate;
 }
