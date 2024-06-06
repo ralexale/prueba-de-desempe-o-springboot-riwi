@@ -1,11 +1,13 @@
 package com.riwi.filtro.hector.filtro_riwi_hector.domain.entities;
 
-import com.riwi.filtro.hector.filtro_riwi_hector.util.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -19,17 +21,17 @@ public class User {
     @Column(columnDefinition = "INT(11)")
     private Long id;
 
-    @Column(length = 50)
-    private String username;
-
-    private String password;
-
     @Column(length = 100)
     private String email;
 
     @Column(name = "full_name", length = 100)
-    private String fullName;
+    private String name;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String password;
+
+
+    private Boolean active;
+
+    @OneToMany(mappedBy = "creatorId", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, orphanRemoval = false)
+    private Set<Survey> surveys = new HashSet<>();
 }
